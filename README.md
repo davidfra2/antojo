@@ -145,10 +145,12 @@ Agregando un **Jugo natural** ($4.500), tu total sería:
 
 **Cambio de modelo:** el modelo original (`meta/llama-3.3-70b-instruct`) fue retirado de NVIDIA NIM el 26/08/2026 (error 410), así que se usó `mistralai/mistral-large-4-1t-a52b`.
 
-**Limitación verificada: nombres que no coinciden con el menú.** La búsqueda tolera tildes, mayúsculas y plurales, pero no diminutivos ni sinónimos: `calcular_pedido(["empanadita"], [1])` devuelve el producto en `no_encontrados`. Depende del modelo traducir "empanadita" a "Empanada" antes de llamar la herramienta; si no lo hace, el usuario recibe un "no está en el menú" aunque sí exista. Se prueba en la sección 6 del notebook.
+**Limitación verificada: nombres que no coinciden con el menú.** La búsqueda tolera tildes, mayúsculas y plurales, pero no diminutivos ni sinónimos: `calcular_pedido(["empanadita"], [1])` devuelve el producto en `no_encontrados`. Depende del modelo traducir "empanadita" a "Empanada" antes de llamar la herramienta; si no lo hace, el usuario recibe un "no está en el menú" aunque sí exista. Se prueba en la sección 6 del notebook (ver abajo).
 *Mejora posible:* búsqueda aproximada (por ejemplo con `difflib.get_close_matches`) que devuelva sugerencias como "¿Quisiste decir Empanada?".
 
-**Otros riesgos a revisar en las trazas:**
-- Que el modelo calcule por su cuenta sin llamar a `calcular_pedido`, a pesar de la instrucción del prompt de sistema.
-- Preguntas ambiguas ("dame algo barato"): el modelo debería explicar su criterio o pedir aclaración.
-- Con modelos más pequeños, llamadas con argumentos mal formados; el ciclo devuelve el error al modelo para que lo corrija.
+**Pruebas adicionales (sección 6 del notebook):**
+- *Pregunta ambigua* ("Dame algo barato"): el modelo explicó su criterio ("por debajo de $10.000"), llamó `buscar_platos(precio_max=10000)` y listó las opciones por categoría. Cumple la regla del prompt de sistema.
+- *Nombre que no coincide* ("¿Cuánto vale una empanadita?"): el modelo primero consultó el menú completo con `buscar_platos`, tradujo "empanadita" a "Empanada" y luego llamó `calcular_pedido` → $3.000. Funcionó, pero depende del modelo; la herramienta sola no lo resolvería.
+- *Límite de llamadas* (forzado a 1): tras la primera llamada (`calcular_pedido`), el agente se detuvo antes de `dividir_cuenta` y respondió el mensaje de límite. `limite_alcanzado = True`, como se esperaba.
+
+**Riesgos que siguen abiertos:** que con otro modelo se calcule por su cuenta sin llamar `calcular_pedido`, o que lleguen argumentos mal formados (el ciclo devuelve el error al modelo para que lo corrija).
