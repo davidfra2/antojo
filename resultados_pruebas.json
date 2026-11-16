@@ -1,0 +1,171 @@
+[
+  {
+    "id": 1,
+    "tipo": "Habitual",
+    "pregunta": "¿Qué almuerzos vegetarianos hay por menos de 15.000?",
+    "esperado": "Sopa de lentejas con arroz ($12.500) y Bandeja vegetariana ($14.500)",
+    "respuesta": "¡Hola! 🌱 Estos son los almuerzos vegetarianos por menos de $15.000:\n\n1. **Sopa de lentejas con arroz** — $12.500\n   (También es sin lactosa)\n\n2. **Bandeja vegetariana** — $14.500\n\n¿Te gustaría saber algo más sobre alguno de ellos? 😊",
+    "traza": [
+      {
+        "herramienta": "buscar_platos",
+        "argumentos": {
+          "categoria": "almuerzo",
+          "restriccion": "vegetariano",
+          "precio_max": 15000
+        },
+        "resultado": "{\"cantidad\": 2, \"platos\": [{\"nombre\": \"Sopa de lentejas con arroz\", \"categoria\": \"almuerzo\", \"precio\": 12500, \"vegetariano\": \"si\", \"sin_lactosa\": \"si\"}, {\"nombre\": \"Bandeja vegetariana\", \"categoria\": \"almuerzo\", \"precio\": 14500, \"vegetariano\": \"si\", \"sin_lactosa\": \"no\"}]}"
+      }
+    ],
+    "llamadas": 1,
+    "limite_alcanzado": false
+  },
+  {
+    "id": 2,
+    "tipo": "Habitual",
+    "pregunta": "¿Cuánto me cuestan dos empanadas y un jugo?",
+    "esperado": "$10.500 (2 × $3.000 + $4.500)",
+    "respuesta": "¡Hola! 😊\n\nDos **empanadas** ($3.000 c/u) y un **jugo natural** ($4.500) te cuestan en total:\n\n**$10.500**",
+    "traza": [
+      {
+        "herramienta": "buscar_platos",
+        "argumentos": {
+          "categoria": "snack"
+        },
+        "resultado": "{\"cantidad\": 6, \"platos\": [{\"nombre\": \"Pandebono\", \"categoria\": \"snack\", \"precio\": 2500, \"vegetariano\": \"si\", \"sin_lactosa\": \"no\"}, {\"nombre\": \"Buñuelo\", \"categoria\": \"snack\", \"precio\": 2500, \"vegetariano\": \"si\", \"sin_lactosa\": \"no\"}, {\"nombre\": \"Empanada\", \"categoria\": \"snack\", \"precio\": 3000, \"vegetariano\": \"no\", \"sin_lactosa\": \"si\"}, {\"nombre\": \"Palito de queso\", \"categoria\": \"snack\", \"precio\": 3500, \"vegetariano\": \"si\", \"sin_lactosa\": \"no\"}, {\"nombre\": \"Papa rellena\", \"categoria\": \"snack\", \"precio\": 4000, \"vegetariano\": \"no\", \"sin_lactosa\": \"si\"}, {\"nombre\": \"Croissant de jamón y queso\", \"categoria\": \"snack\", \"precio\": 6000, \"vegetariano\": \"no\", \"sin_lactosa\": \"no\"}]}"
+      },
+      {
+        "herramienta": "buscar_platos",
+        "argumentos": {
+          "categoria": "bebida"
+        },
+        "resultado": "{\"cantidad\": 7, \"platos\": [{\"nombre\": \"Tinto\", \"categoria\": \"bebida\", \"precio\": 1500, \"vegetariano\": \"si\", \"sin_lactosa\": \"si\"}, {\"nombre\": \"Agua\", \"categoria\": \"bebida\", \"precio\": 2500, \"vegetariano\": \"si\", \"sin_lactosa\": \"si\"}, {\"nombre\": \"Café con leche\", \"categoria\": \"bebida\", \"precio\": 3000, \"vegetariano\": \"si\", \"sin_lactosa\": \"no\"}, {\"nombre\": \"Gaseosa\", \"categoria\": \"bebida\", \"precio\": 3500, \"vegetariano\": \"si\", \"sin_lactosa\": \"si\"}, {\"nombre\": \"Chocolate caliente\", \"categoria\": \"bebida\", \"precio\": 4000, \"vegetariano\": \"si\", \"sin_lactosa\": \"no\"}, {\"nombre\": \"Jugo natural\", \"categoria\": \"bebida\", \"precio\": 4500, \"vegetariano\": \"si\", \"sin_lactosa\": \"si\"}, {\"nombre\": \"Limonada de coco\", \"categoria\": \"bebida\", \"precio\": 6500, \"vegetariano\": \"si\", \"sin_lactosa\": \"no\"}]}"
+      },
+      {
+        "herramienta": "calcular_pedido",
+        "argumentos": {
+          "items": [
+            "Empanada",
+            "Jugo natural"
+          ],
+          "cantidades": [
+            2,
+            1
+          ]
+        },
+        "resultado": "{\"detalle\": [{\"producto\": \"Empanada\", \"cantidad\": 2, \"precio_unitario\": 3000, \"subtotal\": 6000}, {\"producto\": \"Jugo natural\", \"cantidad\": 1, \"precio_unitario\": 4500, \"subtotal\": 4500}], \"total\": 10500}"
+      }
+    ],
+    "llamadas": 3,
+    "limite_alcanzado": false
+  },
+  {
+    "id": 3,
+    "tipo": "Habitual",
+    "pregunta": "Pedimos una bandeja paisa y tres tintos, somos dos, ¿cuánto paga cada uno?",
+    "esperado": "Total $24.000; $12.000 cada uno",
+    "respuesta": "¡Listo! 🍽️\n\n- **Bandeja paisa:** $19.500\n- **3 tintos:** $4.500 (3 × $1.500)\n- **Total:** $24.000\n\nComo son **dos personas**, cada uno paga **$12.000**. ☕",
+    "traza": [
+      {
+        "herramienta": "calcular_pedido",
+        "argumentos": {
+          "items": [
+            "Bandeja paisa",
+            "Tinto"
+          ],
+          "cantidades": [
+            1,
+            3
+          ]
+        },
+        "resultado": "{\"detalle\": [{\"producto\": \"Bandeja paisa\", \"cantidad\": 1, \"precio_unitario\": 19500, \"subtotal\": 19500}, {\"producto\": \"Tinto\", \"cantidad\": 3, \"precio_unitario\": 1500, \"subtotal\": 4500}], \"total\": 24000}"
+      },
+      {
+        "herramienta": "dividir_cuenta",
+        "argumentos": {
+          "total": 24000,
+          "personas": 2
+        },
+        "resultado": "{\"total\": 24000.0, \"personas\": 2, \"por_persona\": 12000}"
+      }
+    ],
+    "llamadas": 2,
+    "limite_alcanzado": false
+  },
+  {
+    "id": 4,
+    "tipo": "Combina herramientas",
+    "pregunta": "Quiero el almuerzo sin lactosa más barato y un jugo, ¿cuánto pago?",
+    "esperado": "Sopa de lentejas con arroz + Jugo natural = $17.000",
+    "respuesta": "¡Hola! 😊\n\nEl almuerzo **sin lactosa más barato** es la **Sopa de lentejas con arroz** a $12.500.\n\nAgregando un **Jugo natural** ($4.500), tu total sería:\n\n**$17.000** 💰\n\n¿Te gustaría ordenar algo más?",
+    "traza": [
+      {
+        "herramienta": "buscar_platos",
+        "argumentos": {
+          "categoria": "almuerzo",
+          "restriccion": "sin_lactosa"
+        },
+        "resultado": "{\"cantidad\": 4, \"platos\": [{\"nombre\": \"Sopa de lentejas con arroz\", \"categoria\": \"almuerzo\", \"precio\": 12500, \"vegetariano\": \"si\", \"sin_lactosa\": \"si\"}, {\"nombre\": \"Arroz con pollo\", \"categoria\": \"almuerzo\", \"precio\": 16000, \"vegetariano\": \"no\", \"sin_lactosa\": \"si\"}, {\"nombre\": \"Pechuga a la plancha\", \"categoria\": \"almuerzo\", \"precio\": 17500, \"vegetariano\": \"no\", \"sin_lactosa\": \"si\"}, {\"nombre\": \"Bandeja paisa\", \"categoria\": \"almuerzo\", \"precio\": 19500, \"vegetariano\": \"no\", \"sin_lactosa\": \"si\"}]}"
+      },
+      {
+        "herramienta": "buscar_platos",
+        "argumentos": {
+          "categoria": "bebida"
+        },
+        "resultado": "{\"cantidad\": 7, \"platos\": [{\"nombre\": \"Tinto\", \"categoria\": \"bebida\", \"precio\": 1500, \"vegetariano\": \"si\", \"sin_lactosa\": \"si\"}, {\"nombre\": \"Agua\", \"categoria\": \"bebida\", \"precio\": 2500, \"vegetariano\": \"si\", \"sin_lactosa\": \"si\"}, {\"nombre\": \"Café con leche\", \"categoria\": \"bebida\", \"precio\": 3000, \"vegetariano\": \"si\", \"sin_lactosa\": \"no\"}, {\"nombre\": \"Gaseosa\", \"categoria\": \"bebida\", \"precio\": 3500, \"vegetariano\": \"si\", \"sin_lactosa\": \"si\"}, {\"nombre\": \"Chocolate caliente\", \"categoria\": \"bebida\", \"precio\": 4000, \"vegetariano\": \"si\", \"sin_lactosa\": \"no\"}, {\"nombre\": \"Jugo natural\", \"categoria\": \"bebida\", \"precio\": 4500, \"vegetariano\": \"si\", \"sin_lactosa\": \"si\"}, {\"nombre\": \"Limonada de coco\", \"categoria\": \"bebida\", \"precio\": 6500, \"vegetariano\": \"si\", \"sin_lactosa\": \"no\"}]}"
+      },
+      {
+        "herramienta": "calcular_pedido",
+        "argumentos": {
+          "items": [
+            "Sopa de lentejas con arroz",
+            "Jugo natural"
+          ],
+          "cantidades": [
+            1,
+            1
+          ]
+        },
+        "resultado": "{\"detalle\": [{\"producto\": \"Sopa de lentejas con arroz\", \"cantidad\": 1, \"precio_unitario\": 12500, \"subtotal\": 12500}, {\"producto\": \"Jugo natural\", \"cantidad\": 1, \"precio_unitario\": 4500, \"subtotal\": 4500}], \"total\": 17000}"
+      }
+    ],
+    "llamadas": 3,
+    "limite_alcanzado": false
+  },
+  {
+    "id": 5,
+    "tipo": "Caso límite",
+    "pregunta": "¿Cuánto cuestan dos sushis?",
+    "esperado": "Indica que el sushi no está en el menú, sin inventar precio",
+    "respuesta": "Lo siento, en nuestra cafetería **no tenemos sushi** en el menú, así que no puedo darte un precio. 😊\n\nSi te interesa algo para el almuerzo, tenemos opciones como el **Wrap de pollo** ($15.000), la **Ensalada mediterránea** ($15.500) o el **Arroz con pollo** ($16.000). ¿Te gustaría saber algo más?",
+    "traza": [
+      {
+        "herramienta": "calcular_pedido",
+        "argumentos": {
+          "items": [
+            "Sushi"
+          ],
+          "cantidades": [
+            2
+          ]
+        },
+        "resultado": "{\"detalle\": [], \"total\": 0, \"no_encontrados\": [\"Sushi\"], \"aviso\": \"Estos productos no están en el menú; no se incluyeron en el total.\"}"
+      },
+      {
+        "herramienta": "buscar_platos",
+        "argumentos": {
+          "categoria": "almuerzo"
+        },
+        "resultado": "{\"cantidad\": 10, \"platos\": [{\"nombre\": \"Sopa de lentejas con arroz\", \"categoria\": \"almuerzo\", \"precio\": 12500, \"vegetariano\": \"si\", \"sin_lactosa\": \"si\"}, {\"nombre\": \"Bandeja vegetariana\", \"categoria\": \"almuerzo\", \"precio\": 14500, \"vegetariano\": \"si\", \"sin_lactosa\": \"no\"}, {\"nombre\": \"Wrap de pollo\", \"categoria\": \"almuerzo\", \"precio\": 15000, \"vegetariano\": \"no\", \"sin_lactosa\": \"no\"}, {\"nombre\": \"Ensalada mediterránea\", \"categoria\": \"almuerzo\", \"precio\": 15500, \"vegetariano\": \"si\", \"sin_lactosa\": \"no\"}, {\"nombre\": \"Arroz con pollo\", \"categoria\": \"almuerzo\", \"precio\": 16000, \"vegetariano\": \"no\", \"sin_lactosa\": \"si\"}, {\"nombre\": \"Lasaña de verduras\", \"categoria\": \"almuerzo\", \"precio\": 16500, \"vegetariano\": \"si\", \"sin_lactosa\": \"no\"}, {\"nombre\": \"Ajiaco\", \"categoria\": \"almuerzo\", \"precio\": 17000, \"vegetariano\": \"no\", \"sin_lactosa\": \"no\"}, {\"nombre\": \"Pechuga a la plancha\", \"categoria\": \"almuerzo\", \"precio\": 17500, \"vegetariano\": \"no\", \"sin_lactosa\": \"si\"}, {\"nombre\": \"Lasaña de carne\", \"categoria\": \"almuerzo\", \"precio\": 18000, \"vegetariano\": \"no\", \"sin_lactosa\": \"no\"}, {\"nombre\": \"Bandeja paisa\", \"categoria\": \"almuerzo\", \"precio\": 19500, \"vegetariano\": \"no\", \"sin_lactosa\": \"si\"}]}"
+      },
+      {
+        "herramienta": "buscar_platos",
+        "argumentos": {
+          "categoria": "snack"
+        },
+        "resultado": "{\"cantidad\": 6, \"platos\": [{\"nombre\": \"Pandebono\", \"categoria\": \"snack\", \"precio\": 2500, \"vegetariano\": \"si\", \"sin_lactosa\": \"no\"}, {\"nombre\": \"Buñuelo\", \"categoria\": \"snack\", \"precio\": 2500, \"vegetariano\": \"si\", \"sin_lactosa\": \"no\"}, {\"nombre\": \"Empanada\", \"categoria\": \"snack\", \"precio\": 3000, \"vegetariano\": \"no\", \"sin_lactosa\": \"si\"}, {\"nombre\": \"Palito de queso\", \"categoria\": \"snack\", \"precio\": 3500, \"vegetariano\": \"si\", \"sin_lactosa\": \"no\"}, {\"nombre\": \"Papa rellena\", \"categoria\": \"snack\", \"precio\": 4000, \"vegetariano\": \"no\", \"sin_lactosa\": \"si\"}, {\"nombre\": \"Croissant de jamón y queso\", \"categoria\": \"snack\", \"precio\": 6000, \"vegetariano\": \"no\", \"sin_lactosa\": \"no\"}]}"
+      }
+    ],
+    "llamadas": 3,
+    "limite_alcanzado": false
+  }
+]
