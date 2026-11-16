@@ -1,0 +1,31 @@
+nombre,categoria,precio,vegetariano,sin_lactosa
+Bandeja paisa,almuerzo,19500,no,si
+Bandeja vegetariana,almuerzo,14500,si,no
+Arroz con pollo,almuerzo,16000,no,si
+Sopa de lentejas con arroz,almuerzo,12500,si,si
+Pechuga a la plancha,almuerzo,17500,no,si
+Lasaña de carne,almuerzo,18000,no,no
+Lasaña de verduras,almuerzo,16500,si,no
+Wrap de pollo,almuerzo,15000,no,no
+Ajiaco,almuerzo,17000,no,no
+Ensalada mediterránea,almuerzo,15500,si,no
+Arepa con quesito,desayuno,5500,si,no
+Huevos pericos con arepa,desayuno,8000,si,si
+Calentado,desayuno,11000,no,si
+Granola con yogur,desayuno,7500,si,no
+Empanada,snack,3000,no,si
+Pandebono,snack,2500,si,no
+Buñuelo,snack,2500,si,no
+Papa rellena,snack,4000,no,si
+Croissant de jamón y queso,snack,6000,no,no
+Palito de queso,snack,3500,si,no
+Tinto,bebida,1500,si,si
+Café con leche,bebida,3000,si,no
+Jugo natural,bebida,4500,si,si
+Limonada de coco,bebida,6500,si,no
+Agua,bebida,2500,si,si
+Gaseosa,bebida,3500,si,si
+Chocolate caliente,bebida,4000,si,no
+Brownie,postre,4500,si,no
+Fruta picada,postre,5000,si,si
+Arroz con leche,postre,4000,si,no
