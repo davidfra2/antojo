@@ -19,7 +19,7 @@ from herramientas import TOOLS, TOOL_REGISTRY
 # ── Configuración del modelo (NVIDIA NIM, endpoint compatible con OpenAI) ───
 
 BASE_URL = "https://integrate.api.nvidia.com/v1"
-MODEL = os.getenv("ANTOJO_MODEL", "meta/llama-3.3-70b-instruct")
+MODEL = os.getenv("ANTOJO_MODEL", "mistralai/mistral-large-4-1t-a52b")
 MAX_LLAMADAS = 5
 
 MENSAJE_LIMITE = (

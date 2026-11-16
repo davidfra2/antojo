@@ -85,7 +85,7 @@ export NVIDIA_API_KEY="nvapi-..."      # en Windows: set NVIDIA_API_KEY=nvapi-..
 jupyter notebook notebooks/antojo.ipynb
 ```
 
-El modelo por defecto es `meta/llama-3.3-70b-instruct`. Se puede cambiar con la variable de entorno `ANTOJO_MODEL`.
+El modelo por defecto es `mistralai/mistral-large-4-1t-a52b`. Se puede cambiar con la variable de entorno `ANTOJO_MODEL`.
 
 **Fuentes y herramientas:** menú ficticio creado por el equipo; Python, pandas, cliente `openai` contra el endpoint compatible de NVIDIA NIM; ciclo adaptado de `part01_from_prompt_to_action.ipynb` (Lecture 11).
 
