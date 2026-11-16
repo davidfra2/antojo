@@ -6,7 +6,7 @@
 |---|
 | David Ríos |
 | Juan Pablo Gaviria |
-| Sara Echeverry |
+| Sara Echeverri |
 
 **Opción elegida:** B — Agente con herramientas
 
